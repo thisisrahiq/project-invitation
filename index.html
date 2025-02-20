@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Rahiq & Irin's Nikah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              softpink: "#FDECEF", // Soft pink background
+              deeprose: "#B56576", // Text and accent color
+              lightrose: "#FAD4D8", // Lighter rose for borders
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-softpink min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-3xl p-4">
+      <h1 class="text-3xl md:text-5xl font-bold text-deeprose text-center mb-6">
+        Welcome to Rahiq & Irin's Nikah
+      </h1>
+      <div
+        class="border-4 border-lightrose rounded-3xl overflow-hidden shadow-2xl relative"
+      >
+        <video
+          id="nikahVideo"
+          class="w-full"
+          src="resources/Nikah Invitation Mosque.MOV"
+        ></video>
+        <div
+          class="flex justify-center gap-4 bg-softpink py-3 border-t-4 border-deeprose"
+        >
+          <button
+            id="playButton"
+            class="bg-deeprose text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition"
+          >
+            ▶️ Play
+          </button>
+          <button
+            id="pauseButton"
+            class="bg-deeprose text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition"
+          >
+            ⏸️ Pause
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const video = document.getElementById("nikahVideo");
+      const playButton = document.getElementById("playButton");
+      const pauseButton = document.getElementById("pauseButton");
+
+      playButton.addEventListener("click", () => video.play());
+      pauseButton.addEventListener("click", () => video.pause());
+    </script>
+  </body>
+</html>
