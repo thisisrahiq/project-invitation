@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome to Rahiq & Irin's Nikah</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              softpink: "#FDECEF", // Soft pink background
-              deeprose: "#B56576", // Text and accent color
-              lightrose: "#FAD4D8", // Lighter rose for borders
+              softpink: "#FDECEF",
+              deeprose: "#B56576",
+              lightrose: "#FAD4D8",
             },
           },
         },
@@ -22,20 +23,21 @@
   <body
     class="bg-softpink min-h-screen flex flex-col items-center justify-center"
   >
-    <div class="w-full max-w-3xl p-4">
+    <div class="w-full max-w-screen-2xl p-4">
       <h1 class="text-3xl md:text-5xl font-bold text-deeprose text-center mb-6">
         Welcome to Rahiq & Irin's Nikah
       </h1>
       <div
-        class="border-4 border-lightrose rounded-3xl overflow-hidden shadow-2xl relative"
+        class="border-4 border-lightrose rounded-3xl overflow-hidden shadow-2xl relative w-full"
       >
+        <!-- ✅ FULL WIDTH, RESPONSIVE VIDEO WITH NO CROPPING -->
         <video
           id="nikahVideo"
-          class="w-full"
-          src="resources/Nikah Invitation Ambroasia.MOV"
+          class="w-full h-auto object-contain"
+          style="max-height: 80vh"
+          controls
         ></video>
 
-        <!-- Play/Pause Button at the bottom -->
         <div
           class="flex justify-center bg-softpink py-3 border-t-4 border-deeprose"
         >
@@ -48,7 +50,6 @@
         </div>
       </div>
 
-      <!-- "See the Location" Button -->
       <div class="flex justify-center mt-6">
         <a
           href="location.html"
@@ -62,6 +63,15 @@
     <script>
       const video = document.getElementById("nikahVideo");
       const playPauseButton = document.getElementById("playPauseButton");
+      const videoSrc = "resources/Nikah-Invitation.m3u8";
+
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = videoSrc;
+      }
 
       playPauseButton.addEventListener("click", () => {
         if (video.paused) {
